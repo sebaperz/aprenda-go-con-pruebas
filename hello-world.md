@@ -1,11 +1,11 @@
-# Hello, World
+# Hola, Mundo
 
-**[You can find all the code for this chapter here](https://github.com/quii/learn-go-with-tests/tree/main/hello-world)**
+**[Puedes encontrar todo el código de este capítulo aquí](https://github.com/quii/learn-go-with-tests/tree/main/hello-world)**
 
-It is traditional for your first program in a new language to be [Hello, World](https://en.m.wikipedia.org/wiki/%22Hello,_World!%22_program).
+Es tradicional que tu primer programa en un nuevo lenguaje sea [Hola, Mundo](https://en.m.wikipedia.org/wiki/%22Hello,_World!%22_program).
 
-- Create a folder wherever you like
-- Put a new file in it called `hello.go` and put the following code inside it
+- Crea una carpeta donde quieras
+- Pon un nuevo archivo en ella llamado `hola.go` y pon el siguiente código en él
 
 ```go
 package main
@@ -13,119 +13,120 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("Hello, world")
+	fmt.Println("Hola, mundo")
 }
 ```
 
-To run it, type `go run hello.go`.
+Para ejecutarlo, escribe `go run hola.go`.
 
-## How it works
+## Cómo funciona
 
-When you write a program in Go, you will have a `main` package defined with a `main` func inside it. Packages are ways of grouping up related Go code together.
+Cuando escribes un programa en Go, tendrás un paquete `main` definido con una función `main` adentro. Los paquetes son formas de agrupar código Go que se relaciona entre sí.
 
-The `func` keyword defines a function with a name and a body.
+La palabra clave `func` define una función con un nombre y un cuerpo.
 
-With `import "fmt"` we are importing a package which contains the `Println` function that we use to print.
+Con `import «fmt»` estamos importando un paquete que contiene la función `Println` que usamos para imprimir.
 
-## How to test
+## Cómo probar
 
-How do you test this? It is good to separate your "domain" code from the outside world \(side-effects\). The `fmt.Println` is a side effect \(printing to stdout\), and the string we send in is our domain.
+¿Cómo probar esto? Es bueno separar tu código de "dominio" del mundo exterior (efectos secundarios). El `fmt.Println` es un efecto secundario \(imprimir a stdout\), y la string que enviamos es nuestro dominio.
 
-So let's separate these concerns so it's easier to test
+Así que vamos a separar estas preocupaciones por lo que es más fácil de probar
 
 ```go
 package main
 
 import "fmt"
 
-func Hello() string {
-	return "Hello, world"
+func Hola() string {
+	return "Hola, mundo"
 }
 
 func main() {
-	fmt.Println(Hello())
+	fmt.Println(Hola())
 }
 ```
 
-We have created a new function with `func`, but this time, we've added another keyword, `string,` to the definition. This means this function returns a `string`.
+Hemos creado una nueva función con `func`, pero esta vez, hemos añadido otra palabra clave, `string,` a la definición. Esto significa que esta función devuelve una `string`.
 
-Now create a new file called `hello_test.go` where we are going to write a test for our `Hello` function
+Ahora crea un nuevo fichero llamado `hello_test.go` donde vamos a escribir un test para nuestra función `Hello`.
 
 ```go
 package main
 
 import "testing"
 
-func TestHello(t *testing.T) {
-	got := Hello()
-	want := "Hello, world"
+func TestHola(t *testing.T) {
+	obtenido := Hola()
+	deseado := "Hola, mundo"
 
-	if got != want {
-		t.Errorf("got %q want %q", got, want)
+	if obtenido != deseado {
+		t.Errorf("obtenido %q deseado %q", obtenido, deseado)
 	}
 }
 ```
 
-## Go modules?
+## Módulos Go?
 
-The next step is to run the tests. Enter `go test` in your terminal. If the tests pass, then you are probably using an earlier version of Go. However, if you are using Go 1.16 or later, the tests will likely not run. Instead, you will see an error message like this in the terminal:
+El siguiente paso es ejecutar las pruebas. Escribe `go test` en tu terminal. Si las pruebas pasan, probablemente estés usando una versión anterior de Go. Sin embargo, si estás usando Go 1.16 o posterior, es probable que las pruebas no se ejecuten. En su lugar, verás un mensaje de error como este en el terminal:
 
 ```shell
 $ go test
 go: cannot find main module; see 'go help modules'
 ```
 
-What's the problem? In a word, [modules](https://blog.golang.org/go116-module-changes). Luckily, the problem is easy to fix. Enter `go mod init example.com/hello` in your terminal. That will create a new file with the following contents:
+¿Cuál es el problema? En una palabra, [ módulos ](https://blog.golang.org/go116-module-changes). Por suerte, el problema es fácil de solucionar. Introduce `go mod init ejemplo.com/hola` en tu terminal. Esto creará un nuevo archivo con el siguiente contenido:
 
 ```
-module example.com/hello
+module ejemplo.com/hola
 
 go 1.16
 ```
 
-This file tells the `go` tools essential information about your code. If you planned to distribute your application, you would include where the code was available for download as well as information about dependencies.  The name of the module, example\.com\/hello, usually refers to a URL where the module can be found and downloaded. For compatibility with tools we'll start using soon, make sure your module's name has a dot somewhere in it, like the dot in .com of example\.com/hello. For now, your module file is minimal, and you can leave it that way. To read more about modules, [you can check out the reference in the Golang documentation](https://golang.org/doc/modules/gomod-ref). We can get back to testing and learning Go now since the tests should run, even on Go 1.16.
+Este archivo proporciona a `go`  las información esencial sobre tu código. Si planeas distribuir tu aplicación, incluirías dónde se puede descargar el código, así como información sobre las dependencias.  El nombre del módulo, ejemplo\.com\/hola, normalmente hace referencia a una URL donde se puede encontrar y descargar el módulo. Por compatibilidad con las herramientas que empezaremos a usar pronto, asegúrate de que el nombre de tu módulo tiene un punto en alguna parte, como el punto en .com de ejemplo\.com/hola. Por ahora, tu archivo de módulo es mínimo, y puedes dejarlo así. Para leer más sobre módulos, [puedes consultar la referencia en la documentación de Golang](https://golang.org/doc/modules/gomod-ref). Ahora podemos volver a hacer pruebas y aprender Go, ya que las pruebas deberían ejecutarse, incluso en Go 1.16.
 
-In future chapters, you will need to run `go mod init SOMENAME` in each new folder before running commands like `go test` or `go build`.
+En futuros capítulos, necesitarás ejecutar `go mod init ALGÚNNOMBRE` en cada carpeta nueva antes de ejecutar comandos como `go test` o `go build`.
 
-## Back to Testing
+## Volver a Pruebas
 
-Run `go test` in your terminal. It should've passed! Just to check, try deliberately breaking the test by changing the `want` string.
+Ejecuta `go test` en tu terminal. ¡Debería haber pasado! Sólo para comprobarlo, intenta romper deliberadamente el test cambiando la cadena `deseado`.
 
-Notice how you have not had to pick between multiple testing frameworks and then figure out how to install them. Everything you need is built into the language, and the syntax is the same as the rest of the code you will write.
+Fíjate en que no has tenido que elegir entre múltiples frameworks de pruebas y luego averiguar cómo instalarlos. Todo lo que necesitas está integrado en el lenguaje, y la sintaxis es la misma que la del resto del código que vas a escribir.
 
-### Writing tests
 
-Writing a test is just like writing a function, with a few rules
+### Escribir pruebas
 
-* It needs to be in a file with a name like `xxx_test.go`
-* The test function must start with the word `Test`
-* The test function takes one argument only `t *testing.T`
-* To use the `*testing.T` type, you need to `import "testing"`, like we did with `fmt` in the other file
+Escribir una prueba es como escribir una función, con algunas reglas
 
-For now, it's enough to know that your `t` of type `*testing.T` is your "hook" into the testing framework so you can do things like `t.Fail()` when you want to fail.
+* Debe estar en un archivo con un nombre como `xxx_test.go`.
+* La función de prueba debe comenzar con la palabra `Test`.
+* La función de prueba sólo tiene un argumento: `t *prueba.T`.
+* Para usar el tipo `*testing.T`, necesitas `import «testing»`, como hicimos con `fmt` en el otro fichero
 
-We've covered some new topics:
+Por ahora, basta con saber que tu `t` de tipo `*testing.T` es tu "enganche" al framework de pruebas para que puedas hacer cosas como `t.Fail()` cuando quieras fallar.
+
+Hemos cubierto algunos temas nuevos:
 
 #### `if`
-If statements in Go are very much like other programming languages.
+Las sentencias `if` en Go son muy parecidas a las de otros lenguajes de programación.
 
-#### Declaring variables
+#### Declarando variables
 
-We're declaring some variables with the syntax `varName := value`, which lets us reuse some values in our test for readability.
+Vamos a declarar algunas variables con la sintaxis `var Nombre := valor`, que nos permite reutilizar algunos valores en nuestra prueba para facilitar la lectura.
 
 #### `t.Errorf`
 
-We are calling the `Errorf` _method_ on our `t`, which will print out a message and fail the test. The `f` stands for format, which allows us to build a string with values inserted into the placeholder values `%q`. When you make the test fail, it should be clear how it works.
+Estamos llamando al _método_ `Errorf` en nuestro `t`, que imprimirá un mensaje y fallará el test. La `f` significa formato, lo que nos permite construir una cadena con valores insertados en el marcador de posición `%q`. Cuando hagas fallar la prueba, debería quedar claro cómo funciona.
 
-You can read more about the placeholder strings in the [fmt documentation](https://pkg.go.dev/fmt#hdr-Printing). For tests, `%q` is very useful as it wraps your values in double quotes.
+Puedes leer más sobre las cadenas de marcadores de posición en la [documentación de fmt](https://pkg.go.dev/fmt#hdr-Printing). Para las pruebas, `%q` es muy útil ya que envuelve sus valores entre comillas dobles.
 
-We will later explore the difference between methods and functions.
+Más adelante exploraremos la diferencia entre métodos y funciones.
 
-### Go's documentation
+### La documentación de Go
 
-Another quality-of-life feature of Go is the documentation.  We just saw the documentation for the fmt package at the official package viewing website, and Go also provides ways for quickly getting at the documentation offline.
+Otra característica de calidad de vida de Go es la documentación.  Acabamos de ver la documentación para el paquete fmt en el sitio web oficial de visualización de paquetes, y Go también proporciona maneras de obtener rápidamente la documentación sin estar conectado.
 
-Go has a built-in tool, doc, which lets you examine any package installed on your system, or the module you're currently working on. To view that same documentation for the Printing verbs:
+Go tiene una herramienta incorporada, doc, que le permite examinar cualquier paquete instalado en su sistema, o el módulo en el que está trabajando actualmente. Para ver esa misma documentación para los  Printing:
 
 ```
 $ go doc fmt
@@ -148,10 +149,9 @@ General:
 ...
 ```
 
-Go's second tool for viewing documentation is the pkgsite command, which powers Go's official package viewing website.  You can install pkgsite with `go install golang.org/x/pkgsite/cmd/pkgsite@latest`, then run it with `pkgsite -open .`.  Go's install command will download the source files from that repository and build them into an executable binary.  For a default installation of Go, that executable will be in `$HOME/go/bin` for Linux and macOS, and `%USERPROFILE%\go\bin` for Windows.  If you have not already added those paths to your $PATH var, you might want to do so to make running go-installed commands easier.
+La segunda herramienta de Go para ver documentación es el comando pkgsite, que activa el sitio web oficial de Go para ver paquetes.  Puedes instalar pkgsite con `go install golang.org/x/pkgsite/cmd/pkgsite@latest`, y luego ejecutarlo con `pkgsite -open .`.  El comando de instalación de Go descargará los archivos fuente de ese repositorio y los compilará en un binario ejecutable.  En una instalación por defecto de Go, ese ejecutable estará en `$HOME/go/bin` para Linux y macOS, y `%USERPROFILE%\go\bin` para Windows.  Si aún no ha añadido esas rutas a su $PATH var, es posible que desee hacerlo para facilitar la ejecución de los comandos instalados en Go.
 
-The vast majority of the standard library has excellent documentation with examples. Navigating to [http://localhost:8080/testing](http://localhost:8080/testing) would be worthwhile to see what's available to you.
-
+La mayor parte de la biblioteca estándar tiene una excelente documentación con ejemplos. Navega a [http://localhost:8080/testing](http://localhost:8080/testing) podría valer la pena para ver lo que está disponible para usted.
 
 ### Hello, YOU
 
