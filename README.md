@@ -1,19 +1,19 @@
-# Learn Go with Tests
+# Aprende Go con Tests
 
 <p align="center">
   <img src="red-green-blue-gophers-smaller.png" />
 </p>
 
-[Art by Denise](https://twitter.com/deniseyu21)
+[Arte por Denise](https://twitter.com/deniseyu21)
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/quii/learn-go-with-tests)](https://goreportcard.com/report/github.com/quii/learn-go-with-tests)
 
-## Formats
+## Formatos
 
 - [Gitbook](https://quii.gitbook.io/learn-go-with-tests)
-- [EPUB or PDF](https://github.com/quii/learn-go-with-tests/releases)
+- [EPUB o PDF](https://github.com/quii/learn-go-with-tests/releases)
 
-## Translations
+## Traducciones
 
 - [中文](https://studygolang.gitbook.io/learn-go-with-tests)
 - [Português](https://larien.gitbook.io/aprenda-go-com-testes/)
@@ -22,25 +22,36 @@
 - [Türkçe](https://halilkocaoz.gitbook.io/go-programlama-dilini-ogren/)
 - [فارسی](https://go-yaad-begir.gitbook.io/go-ba-test/)
 
-## Support me
+## Apoya al autor
 
-I am proud to offer this resource for free, but if you wish to give some appreciation:
+Quii realizo un excelente trabajo con la creacion de este material, pueden apoyarlo de las siguiente formas:
 
-- [Tweet me @quii](https://twitter.com/quii)
+- [Tuitéalo @quii](https://twitter.com/quii)
 - <a rel="me" href="https://mastodon.cloud/@quii">Mastodon</a>
-- [Buy me a coffee :coffee:](https://www.buymeacoffee.com/quii)
-- [Sponsor me on GitHub](https://github.com/sponsors/quii)
+- [Invítalo a un café :coffee:](https://www.buymeacoffee.com/quii)
+- [Patrocínalo en GitHub](https://github.com/sponsors/quii)
 
-## Why
+## Por qué
 
-* Explore the Go language by writing tests
-* **Get a grounding with TDD**. Go is a good language for learning TDD because it is a simple language to learn and testing is built-in
-* Be confident that you'll be able to start writing robust, well-tested systems in Go
-* [Watch a video, or read about why unit testing and TDD is important](why.md)
+* Explora el lenguaje Go escribiendo pruebas
+* **Adquiere una base de TDD**. Go es un buen lenguaje para aprender TDD porque es fácil de aprender y las pruebas están integradas.
+* Ten la seguridad de que podrás empezar a escribir sistemas robustos y bien probados en Go.
+* [Mira un video o lee sobre la importancia de las pruebas y TDD](why.md)
 
-## Table of contents
+## Índice
 
-### Go fundamentals
+### Fundamentos de Go 
+
+1. [Instalar Go](install-go.md) - Configura un entorno productivo.
+2. [Hola mundo](hello-world.md) - Declaración de variables, constantes, sentencias if/else, switch, escribe tu primer programa en Go y tu primera prueba. Sintaxis y cierres de subpruebas.
+3. [Enteros](integers.md) - Explora más a fondo la sintaxis de declaración de funciones y aprende nuevas maneras de mejorar la documentación de tu código.
+4. [Iteración](iteration.md) - Aprende sobre `for` y benchmarking.
+5. [Arrays y slices](arrays-and-slices.md) - Aprende sobre Arrays, slices, `len`, varargs, `range` y cobertura de pruebas.
+6. [Struct, methods e interfaces](structs-methods-and-interfaces.md) - Aprende sobre `struct`, methods, `interface` y pruebas guiadas por tablas.
+7. [Pointers y errores](pointers-and-errors.md) - Aprende sobre pointers y errores.
+8. [Maps](maps.md) - Aprende a almacenar valores en la estructura de datos map.
+9. [Inyección de dependencias](dependency-injection.md) - Aprende sobre la inyección de dependencias, y cómo se relaciona con el uso de interfaces y una introducción a io.
+10. [Simulacros](mocking.md) - Tome código existente sin probar y use DI con simulacros para probarlo. 
 
 1. [Install Go](install-go.md) - Set up environment for productivity.
 2. [Hello, world](hello-world.md) - Declaring variables, constants, if/else statements, switch, write your first go program and write your first test. Sub-test syntax and closures.
