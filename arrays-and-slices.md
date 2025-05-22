@@ -359,76 +359,77 @@ func SumaTodo(numerosASumar ...[]int) []int {
 }
 ```
 
-Lots of new things to learn!
+¡Muchas cosas nuevas por aprender!
 
-There's a new way to create a slice. `make` allows you to create a slice with
-a starting capacity of the `len` of the `numbersToSum` we need to work through. The length of a slice is the number of elements it holds `len(mySlice)`, while the capacity is the number of elements it can hold in the underlying array `cap(mySlice)`, e.g., `make([]int, 0, 5)` creates a slice with length 0 and capacity 5.
+Hay una nueva forma de crear un slice. `make` te permite crear un slice con
+una capacidad inicial de `len` de los `numerosASumar` que necesitamos procesar. La longitud de un slice es el número de elementos que contiene `len(miSlice)`, mientras que la capacidad es el número de elementos que puede contener en el array subyacente `cap(miSlice)`, por ejemplo, `make([]int, 0, 5)` crea un slice con longitud 0 y capacidad 5.
 
-You can index slices like arrays with `mySlice[N]` to get the value out or
-assign it a new value with `=`
+Puedes indexar los slices al iguar que con arrays, usando `miSlice[N]` para obtener el valor o
+asignarle un nuevo valor con `=`
 
-The tests should now pass.
+Las pruebas deberían pasar ahora.
 
-## Refactor
+## Refactorizar
 
-As mentioned, slices have a capacity. If you have a slice with a capacity of
-2 and try to do `mySlice[10] = 1` you will get a _runtime_ error.
+Como se mencionó, los slice tienen una capacidad. Si tienes un slice con una capacidad de
+2 y tratas de hacer `miSlice[10] = 1` obtendrás un error de _tiempo de ejecución_.
 
-However, you can use the `append` function which takes a slice and a new value,
-then returns a new slice with all the items in it.
+Sin embargo, puedes usar la función `append` que toma un slice y un nuevo valor,
+luego devuelve un nuevo slice con todos los elementos en ella.
+
 
 ```go
-func SumAll(numbersToSum ...[]int) []int {
-	var sums []int
-	for _, numbers := range numbersToSum {
-		sums = append(sums, Sum(numbers))
+func SumaTodo(numerosASumar...[]int) []int {
+	var sumas []int
+	for _, numeros := range numerosASumar{
+		sumas = append(sumas, Suma(numeros))
 	}
 
-	return sums
+	return sumas
 }
 ```
 
-In this implementation, we are worrying less about capacity. We start with an
-empty slice `sums` and append to it the result of `Sum` as we work through the varargs.
+En esta implementación, nos estamos preocupando menos por la capacidad. Empezamos con un
+slice vacío `sumas` y le añadimos el resultado de `Suma` a medida que trabajamos con los varargs.
 
-Our next requirement is to change `SumAll` to `SumAllTails`, where it will
-calculate the totals of the "tails" of each slice. The tail of a collection is
-all items in the collection except the first one \(the "head"\).
+Nuestro siguiente requisito es cambiar `SumaTodo` a `SumaTodasLasColas`, donde calculará
+ los totales de las "colas" de cada slice. La cola de una colección son
+todos los elementos de la colección excepto el primero (la "cabeza").
 
-## Write the test first
+## Escribe primero la prueba
 
 ```go
-func TestSumAllTails(t *testing.T) {
-	got := SumAllTails([]int{1, 2}, []int{0, 9})
-	want := []int{2, 9}
+func TestSumaTodasLasColas(t *testing.T) {
+	obtenido := SumaTodasLasColas([]int{1, 2}, []int{0, 9})
+	deseado := []int{3, 9}
 
-	if !reflect.DeepEqual(got, want) {
-		t.Errorf("got %v want %v", got, want)
+	if !reflect.DeepEqual(obtenido, deseado) {
+		t.Errorf("obtenido %v deseado %v", obtenido, deseado)
 	}
 }
 ```
 
-## Try and run the test
+## Intenta ejecutar la prueba
 
-`./sum_test.go:26:9: undefined: SumAllTails`
+`./sum_test.go:26:9: undefined: SumaTodasLasColas`
 
-## Write the minimal amount of code for the test to run and check the failing test output
+## Escribe la cantidad mínima de código para que la prueba se ejecute y verifica la salida de la prueba que falla.
 
-Rename the function to `SumAllTails` and re-run the test
+Renombra la funcion a `SumaTodasLasColas` y vuelve a ejecutar la prueba
 
 `sum_test.go:30: got [3 9] want [2 9]`
 
 ## Write enough code to make it pass
 
 ```go
-func SumAllTails(numbersToSum ...[]int) []int {
-	var sums []int
-	for _, numbers := range numbersToSum {
-		tail := numbers[1:]
-		sums = append(sums, Sum(tail))
+func SumaTodasLasColas(numerosASumar ...[]int) []int {
+	var sumas []int
+	for _, numeros := range numerosASumar {
+		cola := numeros[1:]
+		sumas = append(sumas, Suma(cola))
 	}
 
-	return sums
+	return sumas
 }
 ```
 
